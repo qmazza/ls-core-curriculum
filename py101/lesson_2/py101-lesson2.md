@@ -3,6 +3,25 @@
 Here's a short list of guidelines that we recommend. 
 They will help you write readable code, and smooth the process of asking for code reviews at Launch School.
 
+## Contents <!-- omit in toc -->
+- [Lesson 2 notes](#lesson-2-notes)
+  - [Style Guide](#style-guide)
+    - [initializing a variable](#initializing-a-variable)
+    - [defining a function](#defining-a-function)
+    - [defining a class](#defining-a-class)
+    - [Constants](#constants)
+    - [bad](#bad)
+    - [good](#good)
+  - [git init](#git-init)
+  - [Truthinesss](#truthinesss)
+  - [Expressions \& conditionals](#expressions--conditionals)
+  - [Logical operators](#logical-operators)
+  - [The `and` operator](#the-and-operator)
+  - [The `or` operator](#the-or-operator)
+  - [`not` operator](#not-operator)
+  - [Short-Circuit operators - `and`, `or`](#short-circuit-operators---and-or)
+  - [Truthiness](#truthiness)
+
 ## Style Guide
 	Set your text editor to use space characters -- not tabs -- for indentation. The editor should also insert spaces if you press the Tab key on your keyboard.
 Set your text editor to use 4 spaces for indentation and when converting tab characters to spaces.
