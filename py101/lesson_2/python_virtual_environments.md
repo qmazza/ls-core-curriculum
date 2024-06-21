@@ -67,3 +67,15 @@ deactivate #to exit
 ```
 
 ## Using an Environment
+
+Our environments are set up and applications are ready to run.
+
+```python
+source ~/.venv/env_a/bin/activate
+
+source ~/.venv/env_b/bin/activate
+
+source ~/.venv/env_c/bin/activate 
+
+Deactivate
+```
