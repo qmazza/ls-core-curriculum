@@ -1,0 +1,24 @@
+{
+    "en": {
+      "welcome": "Welcome to Calculator!",
+      "invalid_number": "Hmm... that doesn't look like a valid number.",
+      "number_prompt_1": "What's the first number?",
+      "number_prompt_2": "What's the second number?",
+      "operation_prompt": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+      "invalid_operation": "You must choose 1, 2, 3, or 4",
+      "another_operation": "Would you like to perform another calculation? (y/n) ",
+      "result": "The result is {output}",
+      "division_by_zero": "Error: Cannot divide by zero."
+    },
+    "es": {
+      "welcome": "¡Bienvenido a la Calculadora!",
+      "invalid_number": "Hmm... eso no parece ser un número válido.",
+      "number_prompt_1": "¿Cuál es el primer número?",
+      "number_prompt_2": "¿Cuál es el segundo número?",
+      "operation_prompt": "¿Qué operación te gustaría realizar?\n1) Sumar 2) Restar 3) Multiplicar 4) Dividir",
+      "invalid_operation": "Debes elegir 1, 2, 3 o 4",
+      "another_operation": "¿Te gustaría realizar otro cálculo? (s/n) ",
+      "result": "El resultado es {output}",
+      "division_by_zero": "Error: No se puede dividir entre cero."
+    }
+  }
