@@ -2,6 +2,18 @@ Notes for Lesson 2 for PY101 course.
 - Type Conversions
   
 # Contents
+- [Contents](#contents)
+- [Introduction](#introduction)
+- [Explicit type coercion](#explicit-type-coercion)
+  - [Coercing values to Integers](#coercing-values-to-integers)
+  - [Coercing values to Floats](#coercing-values-to-floats)
+  - [Coercing values to Strings](#coercing-values-to-strings)
+  - [Coercing values to Booleans](#coercing-values-to-booleans)
+  - [repr() vs str()](#repr-vs-str)
+- [Implicit type coercion](#implicit-type-coercion)
+  - [Combining Integer with Float](#combining-integer-with-float)
+  - [Combining String with Non-string](#combining-string-with-non-string)
+
 
 # Introduction
 
