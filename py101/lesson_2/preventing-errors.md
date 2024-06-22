@@ -2,6 +2,15 @@ Notes for Lesson 2 for PY101 course.
 - Preventing Errors
   
 # Contents
+- [Contents](#contents)
+- [Introduction](#introduction)
+- [LBYL: Look Before You Leap](#lbyl-look-before-you-leap)
+  - [Guard Clauses](#guard-clauses)
+  - [When To Use Guard Clauses](#when-to-use-guard-clauses)
+- [EAFP: It's Easier to Ask Forgiveness than Permission](#eafp-its-easier-to-ask-forgiveness-than-permission)
+- [Detecting Edge Cases](#detecting-edge-cases)
+- [Planning Your Code](#planning-your-code)
+
 
 # Introduction
 - Preventing errors and handlign exceptions is crucial for writing reliable code.
@@ -63,6 +72,37 @@ print(lower_first(32))     # Output: "32"
 - More examples in errors.md
   
 # Detecting Edge Cases
+- In `lower_first`, the shortest possible string `('')` is an edge case.
+- To identify edge cases, analyze inputs. In most functions, they are typically arguments.
+- Each argument may have certain values that can lead to unexpected behavior.
+- In `lower_first`, we observed that empty strings can cause issues when the function isn't prepared for them.
+- Other types of strings can also pose challenges, such as those beginning or ending with spaces, consisting solely of spaces, or containing special characters.
+- Specific  combinations of values can lead to unforeseen conditions.
 
 # Planning Your Code
 
+- Plan ahead by writing out common use cases of a function, then check how the function handles it.
+- It's a great way to identify edge cases.
+  
+Example: Writing a function that inserts new element to a list in its proper alphabetically sorted position:
+```python
+countries = ['Australia', 'Cuba', 'Senegal']
+
+alpha_insert(countries, 'Brazil')
+
+print(', '.join(countries))  # Outputs "Australia, Brazil, Cuba, Senegal"
+```
+
+Some uses cases we want to ensure `alpha_insert` can handle:
+```python
+alpha_insert([], 'Brazil')             # Inserting into an empty list
+alpha_insert(['Brazil'], 'Australia')  # At the beginning of a list
+alpha_insert(['Brazil'], 'Cuba')       # At the end of a list
+alpha_insert(['Brazil'], 'Brazil')     # Duplicate entry
+```
+
+- Focus on happy path. Most basic use-cases.
+- Afterward, revisit your comprehensive list of use cases and ensure your implementation functions effectively in each scenario.
+- If a specific case fails, address it and then reevaluate the use cases.
+
+>Note: our list of use cases ignores the problem of invalid data types passed as arguments (for instance, passing a Number when a function expects a String). You can check argument types when this is a real possibility, but doing so in every function is unneeded and difficult to maintain.
