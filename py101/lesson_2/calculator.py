@@ -5,7 +5,7 @@
 # - add, subtract, multiply or divide.
 #Perform the calculation and display the result
 
-
+example last check
 def prompt(message):
     print(f"==> {message}")
 
