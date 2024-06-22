@@ -26,7 +26,7 @@ Notes for Lesson 2 for PY101 course.
 - Example: unused variables will cause checker to raise "unused-variable" alert
   
 # Installation & Usage
-- `pip install pylint` for any virtual environment I set up (Current: env_a, env_b, env_c)
+- `pip install pylint` for any virtual environment I set up (Current: env_a, env_b, env_c, env_d)
 
 # Quick tutorial
 - new hello.py

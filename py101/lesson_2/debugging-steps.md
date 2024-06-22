@@ -2,6 +2,15 @@ Notes for Lesson 2 for PY101 course.
 - Steps for Debugging
   
 # Contents
+- [Contents](#contents)
+- [Reproduce the Error](#reproduce-the-error)
+- [Determine the Boundaries of the Error](#determine-the-boundaries-of-the-error)
+- [Trace the Code](#trace-the-code)
+- [Understand the Problem Well](#understand-the-problem-well)
+- [Implement a Fix](#implement-a-fix)
+- [End Result](#end-result)
+- [Test the Fix](#test-the-fix)
+
 
 # Reproduce the Error
 - Reproducing is usually the first step.
@@ -56,11 +65,116 @@ This code:
 - average_grade function which calculates the average grade of all students
 - collect_grades function which groups all grades from students.
 
-We reduce input size to track
-First student
+We reduce input size to track each student
+- First student - works
+- second student - TypeError
+```python
+students = [{'name': 'Bob'}]
+
+# rest of the code omitted
+
+print(average_grade(grades)) # TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
+```
+For the second student, that doesn't have a grade, we get the same error.
+
+Re-try one student with a grade and one without.
+
+```python
+students = [{'name': 'Alice', 'grade': 85}, {'name': 'Bob'}]
+
+# rest of the code omitted
+
+print(average_grade(grades))
+# TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
+```
+- We know which inputs are giving us trouble and have consistent error messages.
+- Can be used to trace code backward to find origination.
+
+```python
+$ python process_students.py
+Traceback (most recent call last):
+  File "/Users/brandi/py101/lesson_2/process_students.py", line 21, in <module>
+    print(average_grade(grades)) # TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/brandi/py101/lesson_2/process_students.py", line 7, in average_grade
+    total = sum(grades)
+            ^^^^^^^^^^^
+TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
+```
+In the stack trace:
+- Makes it all the way to nvoking `average_grade` without error.
+- Means `collect_grades` isn't producting errorsm though giving us unexpect return value.
+- within `average_grade`, line 7 throws error, where we invoke `sum`, passing in `grades`.
+
+Identifying the area an error originates is called trapping the error.
+
 
 # Understand the Problem Well
 
+After narrowing source of bug to line 7 of program, we will inspect the values at each step within the function:
+
+```python
+def average_grade(grades):
+    print(grades)
+    total = sum(grades)
+    average = total / len(grades)
+    return average
+```
+- Passing original `students` list we see `[85, None, 72, 75]`
+- We see the value None in the list. We can't perform addion on NoneType
+ 
 # Implement a Fix
 
-#Test the Fix
+-Multiple ways and layers can be made to fix.
+
+example:
+```python
+try:
+  print(average_grade(grades))
+except Exception:
+  print("Something went wrong")
+```
+- leaves original error in average_grade function, but depending on where problem lies, a solution like that can be all we can do.
+  - Such as using a library or code you can't modify, you have little choice but to deal with edge cases in code.
+- to fix original code, best to do it in collect_grades function. If a student doesn't have a grade, we don't add anything to the list.
+
+**Fix one problem at a time**
+- Working on multiple fixes imakes it easy to become confused.
+- Make a note of issues oyu notice to work on later.
+
+
+# End Result
+```python
+def process_student(student_data):
+    name = student_data.get('name')
+    grade = student_data.get('grade')
+    return (name, grade)
+
+def average_grade(grades):
+    print(grades)
+    total = sum(grades)
+    average = total / len(grades)
+    return average
+
+students = [
+    {'name': 'Alice', 'grade': 85},
+    {'name': 'Bob'},
+    {'name': 'Jack', 'grade': 72},
+    {'name': 'Jane', 'grade': 75},
+]
+
+def collect_grades(students):
+    grades = []
+    for student in students:
+        name, grade = process_student(student)
+        if grade:
+            grades.append(grade)
+    return grades
+
+grades = collect_grades(students)
+print(average_grade(grades))
+```
+# Test the Fix
+
+- Ensure updated code fixed the problem by using a similar set of tests from step #2. 
+- After we learn about automated testing, we'll want to add an automated test to prevent regression. For now, we test manually

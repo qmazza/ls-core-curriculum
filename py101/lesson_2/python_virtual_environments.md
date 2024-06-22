@@ -77,5 +77,7 @@ source ~/.venv/env_b/bin/activate
 
 source ~/.venv/env_c/bin/activate 
 
+source ~/.venv/env_d/bin/activate
+
 Deactivate
 ```
