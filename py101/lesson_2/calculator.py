@@ -5,50 +5,82 @@
 # - add, subtract, multiply or divide.
 #Perform the calculation and display the result
 
-example last check
+#default language
+import json
+
 def prompt(message):
     print(f"==> {message}")
 
 def invalid_number(number_str):
     try:
-        int(number_str)
+        float(number_str)
     except ValueError:
         return True
-
     return False
 
-prompt('Welcome to Calculator!')
+def messages(message, lang='en'):
+    return MESSAGES[lang][message]
 
-prompt("What's the first number?")
-number1 = input()
+with open('calculator_messages.json', 'r') as file:
+    MESSAGES = json.load(file)
 
-while invalid_number(number1):
-    prompt("Hmm... that doesn't look like a valid number.")
-    number1 = input()
+print(messages('welcome'))
+while True:
+    # Language selection prompt
+    prompt("Choose your language (en/es): ")
+    language_choice = input().strip().lower()
 
-prompt("What's the second number?")
-number2 = input()
+    # Validate language choice
+    if language_choice not in ['en', 'es']:
+        prompt("Invalid choice. Please enter 'en' or 'es'.")
+        continue
 
-while invalid_number(number2):
-    prompt("Hmm... that doesn't look like a valid number.")
-    number2 = input()
 
-prompt("""What operation would you like to perform?
-1) Add 2) Subtract 3) Multiply 4) Divide""")
-operation = input()
+    while True:
+        prompt(messages('number_prompt_1', lang=language_choice))
+        number1 = input()
 
-while operation not in ["1", "2", "3", "4"]:
-    prompt("You must choose 1, 2, 3, or 4")
-    operation = input()
+        if not invalid_number(number1):
+            break
 
-match operation:
-    case "1":
-        output = int(number1) + int(number2)
-    case "2":
-        output = int(number1) - int(number2)
-    case "3":
-        output = int(number1) * int(number2)
-    case "4":
-        output = int(number1) / int(number2)
+        prompt(messages('invalid_number', lang=language_choice))
 
-prompt(f"The result is {output}")
+    while True:
+        prompt(messages('number_prompt_2', lang=language_choice))
+        number2 = input()
+
+        if not invalid_number(number2):
+            break
+
+        prompt(messages('invalid_number', lang=language_choice))
+
+    while True:
+        prompt(messages('operation_prompt', lang=language_choice))
+        operation = input()
+
+        if operation in ["1", "2", "3", "4"]:
+            break
+
+        prompt(messages('invalid_operation', lang=language_choice))
+
+    match operation:
+        case "1":
+            output = float(number1) + float(number2)
+        case "2":
+            output = float(number1) - float(number2)
+        case "3":
+            output = float(number1) * float(number2)
+        case "4":
+            if float(number2) == 0:
+                prompt(messages('division_by_zero', lang=language_choice))
+                exit(1)
+            output = float(number1) / float(number2)
+
+    output = round(output, 2)  # Round the result to two decimals
+
+    prompt(messages('result', lang=language_choice).format(output=output))
+
+    prompt(messages('another_operation', lang=language_choice))
+    answer = input()
+    if answer[0].lower() != 'y':
+        break
