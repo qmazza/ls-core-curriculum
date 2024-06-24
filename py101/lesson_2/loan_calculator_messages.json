@@ -1,0 +1,40 @@
+{
+    "en": {
+      "welcome": "Welcome to the Monthly Car Payment Calculator!",
+      "invalid": " is an invalid entry.",
+      "invalid_loan_amount": "Please enter a positive loan amount.",
+      "invalid_loan_length": "Please enter a positive loan term number.",
+      "invalid_apr": "invalid number. Please enter a positive interest rate.",
+      "ask_amount": "Enter the loan amount (e.g,'50000.50'):",
+      "ask_length": "Enter the number of months for the loan term (e.g., '72'):",
+      "ask_apr": "Enter the Annual Percentage Rate(APR) (e.g., '7%'):",
+      "choose_language": "Choose your language (en/es):",
+      "invalid_language": "Please enter 'en' or 'es'.",
+      "another_calculation": "Would you like to perform another calculation? (y/n) ",
+      "conclude": "Your monthly payment would be:",
+      "details_provided": "Based on the details you've provided:",
+      "amount_provided": "- Loan Amount: ",
+      "term_provided": "- Loan term: ",
+      "apr_provided": "- Annual Percentage Rate(APR): ",
+      "goodbye_message": "Thank you for using the Monthly Car Payment Calculator. Goodbye!"
+    },
+    "es": {
+        "welcome": "¡Bienvenido al Calculador Mensual de Pagos de Autos!",
+        "invalid": " es una entrada inválida.",
+        "invalid_loan_amount": "Por favor ingrese un monto de préstamo positivo.",
+        "invalid_loan_length": "Por favor ingrese un número de plazo de préstamo positivo.",
+        "invalid_apr": "Número inválido. Por favor ingrese una tasa de interés positiva.",
+        "ask_amount": "Ingrese el monto del préstamo (por ejemplo, '50000.50'):",
+        "ask_length": "Ingrese el número de meses para el plazo del préstamo (por ejemplo, '72'):",
+        "ask_apr": "Ingrese la Tasa Anual del Porcentaje (APR) (por ejemplo, '7%'):",
+        "choose_language": "Elija su idioma (en/es):",
+        "invalid_language": "Por favor ingrese 'en' o 'es'.",
+        "another_calculation": "¿Desea realizar otro cálculo? (s/n) ",
+        "conclude": "Su pago mensual sería:",
+        "details_provided": "Basado en los detalles proporcionados:",
+        "amount_provided": "- Monto del Préstamo: ",
+        "term_provided": "- Plazo del Préstamo: ",
+        "apr_provided": "- Tasa Anual del Porcentaje (APR): ",
+        "goodbye_message": "Gracias por usar el Calculador Mensual de Pagos de Autos. ¡Adiós!"
+      }
+}
