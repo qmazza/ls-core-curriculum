@@ -1,0 +1,12 @@
+{
+    "welcome": "Welcome to the Ultimate Rock, Paper, Scissors game!\nLet's play!\n",
+    "invalid_entry": "Invalid entry. Please enter r) Rock, p) Paper, s) Scissors, l) Lizard or sp) Spock",
+    "ask_choice": "Choose one: ",
+    "display_choices": "You chose '{user_choice}', Computer chose '{computer_choice}'\n",
+    "player_wins": "You win!\n",
+    "computer_wins": "Computer wins!\n",
+    "no_winner": "It's a tie!\n",
+    "play_again": "Do you want to play again? (y/n)",
+    "invalid_answer": "Invalid entry. Please enter Yes or No",
+    "goodbye": "Thanks for playing! Goodbye!"
+}

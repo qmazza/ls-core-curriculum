@@ -1,80 +1,118 @@
 """
-In this assignment, we'll build a Rock Paper Scissors game. 
-Rock Paper Scissors is a simple game played between two opponents. 
-Both opponents choose an item from rock, paper, or scissors. 
-The winner is decided according to the following rules:
-
-If player a chooses rock and player b chooses scissors, player a wins.
-If player a chooses paper and player b chooses rock, player a wins.
-If player a chooses scissors and player b chooses paper, player a wins.
-If both players choose the same item, neither player wins. It's a tie.
-Our version of the game lets the user play against the computer. The game flow should go like this:
-
-The user makes a choice.
-The computer makes a choice.
-The winner is displayed.
+Rock paper scissors lizard spock
 """
 import random
+import json
+import os
 
-#CONSTANTS
-VALID_CHOICES = ['rock','paper','scissors']
+# CONSTANTs
+VALID_CHOICES = ['rock','paper','scissors','lizard','spock',
+'r','p','s','l','sp']
 
-# Prompt message start helper funciton
-def prompt(message):
-    print(f'==> {message}')
+COMPUTER_CHOICES = ['rock','paper','scissors','lizard','spock']
 
-# Helper function to display winner
+DICT_CHOICES = {'r': 'rock',
+                'p': 'paper', 
+                's': 'scissors',
+                'l': 'lizard',
+                'sp': 'spock'}
+
+winning_choice = {
+    'rock': {'scissors', 'lizard'},
+    'paper': {'rock', 'spock'},
+    'scissors': {'paper', 'lizard'},
+    'lizard': {'spock', 'paper'},
+    'spock': {'scissors', 'rock'}
+}
+
+
 def display_winner(player, computer):
-    if ((player == 'rock' and computer == 'scissors') or
-        (player == 'paper' and computer == 'rock') or
-        (player == 'scissors' and computer == 'paper')):
-        prompt('You win!')
-    elif ((player == 'rock' and computer == 'spaper') or
-        (player == 'paper' and computer == 'scissors') or
-        (player == 'scissors' and computer == 'rock')):
-        prompt('Computer wins!')
+    '''This function checks for the winner'''
+    if computer in winning_choice[player]:
+        print(MESSAGES['player_wins'].center(40))
+    elif player in winning_choice[computer]:
+        print(MESSAGES['computer_wins'].center(40))
     else:
-        prompt("It's a tie!")    
+        print(MESSAGES['no_winner'].center(40))
 
 
 
+def message(key):
+    '''Function to retrieve messages from JSON file'''
+    return MESSAGES[key]
+
+with open('rock_paper_scissors.json', 'r') as file:
+    MESSAGES = json.load(file)
+
+
+def format_choices():
+    '''This function joins and formats choices for displaying.'''
+    return ''.join(f'\n- {key}) {value} '
+    for key, value in DICT_CHOICES.items()).title()
+
+
+def convert_choice(choice):
+    '''This function is converts the users entry of the word into
+    a valid choice'''
+    if choice in DICT_CHOICES:
+        return DICT_CHOICES[user_choice]
+    return choice
+
+
+def prompt(prompt_messages):
+    '''This function improves readability'''
+    print(f'==> {prompt_messages}')
+
+
+def display_choice():
+    '''This function formats and displays both the users and
+    computers choice'''
+    prompt(MESSAGES['display_choices'].format(user_choice=user_choice,
+    computer_choice=computer_choice).title())
+
+
+# Main loop to run the program
 while True:
-    #use .lower? . 
-    # Can interpolate valid_choce with f string
-    # ', ' with join to concatenate into a string.
-    prompt(f'Choose one: {', '.join(VALID_CHOICES)}')
-    choice = input()
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-    # Validate user input
-    while choice not in VALID_CHOICES:
-        prompt("That's not a valid choice")
-        choice = input()
+    # Prompt user for their choice.
+    print(MESSAGES['welcome'])
+    prompt(MESSAGES['ask_choice'] + format_choices())
+    user_choice = input().lower()
+
+
+    # Validate user input.
+    while True:
+        if user_choice not in VALID_CHOICES:
+            prompt(MESSAGES['invalid_entry'])
+            user_choice = input().lower()
+        else:
+            break
+
+    # If user_choice is a key DICT_CHOICES, return value
+    user_choice = convert_choice(user_choice)
 
     # Computers choice
-    computer_choice = random.choice(VALID_CHOICES)
+    computer_choice = random.choice(COMPUTER_CHOICES)
 
-    # Display choices
-    prompt(f'You chose {choice}, computer chose {computer_choice}')
+    # Clear screen then Display choices made
+    os.system('cls' if os.name == 'nt' else 'clear')
+    display_choice()
 
-    # function to check display the winner while being more readable and easier to change.
-    display_winner(choice, computer_choice)
-    
-    # Player Wins:
-    # rock beats scissors
-    # paper beats rock
-    # scissors beats paper
+    # Check results and display the winner
+    display_winner(user_choice, computer_choice)
 
-    # choice = computer_choice tie
-
-    prompt('Do you want to play again? (y/n)')
-    answer = input().lower()
+    # Ask the user to play again
     while True:
-        if answer.startswith('n') or answer.startswith('y'):# Checks for a valid input. Wont let user enter empty string.
-            break
-        
-        prompt('Please enter "y" or "n".')
+        prompt(MESSAGES['play_again'])
         answer = input().lower()
+        if answer.startswith('n') or answer.startswith('y'):
+            break
+        os.system('cls' if os.name == 'nt' else 'clear')
+        prompt(MESSAGES['invalid_answer'])
 
     # After validating input that there is at least an index of 0, break loop.
     if answer[0] == 'n':
+        os.system('cls' if os.name == 'nt' else 'clear')
+        prompt(MESSAGES['goodbye'])
         break
