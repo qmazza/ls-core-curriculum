@@ -8,5 +8,7 @@
     "no_winner": "It's a tie!\n",
     "play_again": "Do you want to play again? (y/n)",
     "invalid_answer": "Invalid entry. Please enter Yes or No",
-    "goodbye": "Thanks for playing! Goodbye!"
+    "goodbye": "Thanks for playing! Goodbye!",
+    "new_round_greeting": "To win, you must beat the computer 3 rounds out of 5.\n",
+    "current_round": "ROUND: {round}"
 }

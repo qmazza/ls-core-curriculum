@@ -29,6 +29,7 @@ WINNING_CHOICE = {
 player_wins = 0
 computer_wins = 0
 ties = 0
+round_number = 1
 
 
 # editing for winner of 5
@@ -47,13 +48,18 @@ def display_winner(player, computer):
         break
 
 def game_count(winner):
-   global player_wins, computer_wins, ties
+    '''This function increments the score count for player,
+    computer, and ties'''
+    global player_wins, computer_wins, ties, round_number
     if winner == 'player':
         player_wins += 1
+        round_number += 1
     elif winner == 'computer':
         computer_wins += 1
+        round_number += 1
     else:
         ties += 1
+        round_number += 1
 
 
 def message(key):
@@ -96,26 +102,54 @@ def score_check():
     if player_wins == 3:
         os.system('cls' if os.name == 'nt' else 'clear')
         print('Congratulations! You\'ve beat the computer and won the game!')
+        display_current_score()
         score_reset()
+        if play_again() == 'n':
+            return False
+        else:
+            os.system('cls' if os.name == 'nt' else 'clear')
     elif computer_wins == 3:
         os.system('cls' if os.name == 'nt' else 'clear')
         print('Game over. Sorry, you\'ve lost to the computer.')
+        display_current_score()
         score_reset()
+        if play_again() == 'n':
+            return False
+        else:
+            os.system('cls' if os.name == 'nt' else 'clear')
+    return True
 
 def score_reset():
     '''Resets the score if user wants to continue'''
-    global player_wins, computer_wins, ties
+    global player_wins, computer_wins, ties, round_number
     player_wins = 0
     computer_wins = 0
     ties = 0
+    round_number = 1
 
+def play_again():
+    while True:
+        prompt(MESSAGES['play_again'])
+        answer = input().lower()
+        if answer.startswith('n') or answer.startswith('y'):
+            return answer
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+        os.system('cls' if os.name == 'nt' else 'clear')
+        prompt(MESSAGES['invalid_answer'])
 
+def display_current_score():
+    print(f"Player wins: {player_wins}")
+    print(f"Computer wins: {computer_wins}")
+    print(f"Ties: {ties}")
+    print(MESSAGES['current_round'].format(round=round_number))
+
+os.system('cls' if os.name == 'nt' else 'clear')
+print(MESSAGES['welcome'])
 # Main loop to run the program
 while True:
-    os.system('cls' if os.name == 'nt' else 'clear')
 
     # Prompt user for their choice.
-    print(MESSAGES['welcome'])
     prompt(MESSAGES['ask_choice'] + format_choices())
     user_choice = input().lower()
 
@@ -123,6 +157,7 @@ while True:
     # Validate user input.
     while True:
         if user_choice not in VALID_CHOICES:
+            os.system('cls' if os.name == 'nt' else 'clear')
             prompt(MESSAGES['invalid_entry'])
             user_choice = input().lower()
         else:
@@ -134,10 +169,11 @@ while True:
     # Computers choice
     computer_choice = random.choice(COMPUTER_CHOICES)
 
-    # Clear screen then Display choices made
+    # Clear screen
     os.system('cls' if os.name == 'nt' else 'clear')
+    
+    # Display choices made
     display_choice()
-
 
     # Check results and display the winner of round
     result = display_winner(user_choice, computer_choice)
@@ -146,24 +182,27 @@ while True:
     game_count(result)
 
     # Display current scores
-    print(f"Player wins: {player_wins}")
-    print(f"Computer wins: {computer_wins}")
-    print(f"Ties: {ties}")
+    display_current_score()
 
     # Check for game winner.
-    score_check()
-
-    # Ask the user to play again
-    while True:
-        prompt(MESSAGES['play_again'])
-        answer = input().lower()
-        if answer.startswith('n') or answer.startswith('y'):
-            break
-        os.system('cls' if os.name == 'nt' else 'clear')
-        prompt(MESSAGES['invalid_answer'])
-
-    # After validating input that there is at least an index of 0, break loop.
-    if answer[0] == 'n':
+    if not score_check():
         os.system('cls' if os.name == 'nt' else 'clear')
         prompt(MESSAGES['goodbye'])
         break
+
+
+    prompt(MESSAGES['new_round_greeting'])
+    
+  #  answer = play_again()
+    #if player_wins or computer_wins == 3:
+    #     play_again()
+
+        # Ask the user to play again
+#    if player_wins or computer_wins == 3:
+
+        # After validating input that there is at least an index of 0, break loop.
+ #   if answer[0] == 'n':
+  #      os.system('cls' if os.name == 'nt' else 'clear')
+   #     prompt(MESSAGES['goodbye'])
+   #     break
+    #os.system('cls' if os.name == 'nt' else 'clear')
