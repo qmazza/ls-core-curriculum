@@ -1,5 +1,5 @@
-Notes for Lesson 2 for PY101 course.
-- Programming Foundations with Python: Basics
+Notes for Lesson 3 for PY101 course.
+- Practice Problems: Easy 3
   
 # Contents
 - [Contents](#contents)
