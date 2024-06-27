@@ -9,6 +9,9 @@
     "play_again": "Do you want to play again? (y/n)",
     "invalid_answer": "Invalid entry. Please enter Yes or No",
     "goodbye": "Thanks for playing! Goodbye!",
-    "new_round_greeting": "To win, you must beat the computer 3 rounds out of 5.\n",
-    "current_round": "ROUND: {round}"
+    "new_round_rule": "To win, you must beat the computer 3 rounds out of 5.\n",
+    "current_round": "ROUND: {round}\n",
+    "player_game_winner": "Congratulations! You've beat the computer and won the game!",
+    "computer_game_winner": "Game over. Sorry, you've lost to the computer.",
+    "display_current_score": "- Player wins: {player_wins}\n- Computer wins: {computer_wins}\n- Ties: {ties}"
 }
