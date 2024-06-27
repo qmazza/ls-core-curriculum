@@ -2,6 +2,22 @@ Notes for Lesson 2 for PY101 course.
 - Programming Foundations with Python: Basics
   
 # Contents
+- [Contents](#contents)
+- [MyClass is an example of](#myclass-is-an-example-of)
+- [Identify the valid Python comment style.](#identify-the-valid-python-comment-style)
+- [Examine the following code](#examine-the-following-code)
+- [What is Pseudocode?](#what-is-pseudocode)
+- [Examine the code below:](#examine-the-code-below)
+- [Given the following pseudocode, which code implementation most closely matches it?](#given-the-following-pseudocode-which-code-implementation-most-closely-matches-it)
+- [Which of the following values are considered falsy in Python? Choose all that apply:](#which-of-the-following-values-are-considered-falsy-in-python-choose-all-that-apply)
+- [What specifically do we mean when we refer to a variable's scope?](#what-specifically-do-we-mean-when-we-refer-to-a-variables-scope)
+- [Select all of the statements which are true regarding local variable scope in Python.](#select-all-of-the-statements-which-are-true-regarding-local-variable-scope-in-python)
+- [Which statement most accurately describes why the last line of the code below outputs "hi"?](#which-statement-most-accurately-describes-why-the-last-line-of-the-code-below-outputs-hi)
+- [Looking again at the code from the previous question:](#looking-again-at-the-code-from-the-previous-question)
+- [Given the following code, which names are in scope when line 12 is reached?](#given-the-following-code-which-names-are-in-scope-when-line-12-is-reached)
+- [In Python, what do we mean when we talk about variables as references? Select all answers that apply.](#in-python-what-do-we-mean-when-we-talk-about-variables-as-references-select-all-answers-that-apply)
+- [The following Python code doesn't raise an exception. Why is that?](#the-following-python-code-doesnt-raise-an-exception-why-is-that)
+
 
 # MyClass is an example of
 PascalCase
@@ -149,5 +165,13 @@ Variables in Python are references to objects in memory.
 
 # The following Python code doesn't raise an exception. Why is that?
 
+```python
+name = "Lisa"
 
+def name_func():
+    return name
 
+print(name_func())
+```
+
+Because Python functions can access variables defined in the global or enclosing scope.
