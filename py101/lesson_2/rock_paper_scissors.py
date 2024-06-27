@@ -47,7 +47,7 @@ def display_winner(player, computer):
 
 def game_count(winner):
     '''This function increments the score count for player,
-    computer, and ties'''
+    computer, ties, and the round'''
     global player_wins, computer_wins, ties, round_number
     if winner == 'player':
         player_wins += 1
@@ -97,7 +97,8 @@ def display_choice():
 
 def score_check():
     '''This function checks the score. If player or computer win
-    3 out of 5 times, the game is over and scores are reset'''
+    3 out of 5 times, the game is over, scores are reset, and
+    the player is asked to play again.'''
     if player_wins == 3:
         os.system('cls' if os.name == 'nt' else 'clear')
         prompt(MESSAGES['player_game_winner'])
