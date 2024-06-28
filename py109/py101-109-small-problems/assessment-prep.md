@@ -1,5 +1,5 @@
 Notes for Lesson 2 for PY101 course.
-- Flowcharts
+- Preparation notes for written
   
 # Contents
 
