@@ -3,7 +3,8 @@ Practice Problems for Lesson 3 for PY109 course.
   
 ## Contents 
 
-# Question 1
+# Question 1 - Isn't it Odd?
+
 Write a function that takes one integer argument and returns True when the number's absolute value is odd, False otherwise.
 
 My answer:
@@ -36,7 +37,7 @@ def is_odd(number):
 >The `abs` function returns the absolute value of the argument, ensuring it's positive. Then check whther the resulting number modulo 2 equals 1, which would indicate it's odd
 
 
-# Question 2
+# Question 2 - Odd Numbers
 
 Print all odd numbers from 1 to 99, inclusive, with each number on a separate line.
 
@@ -70,7 +71,7 @@ print(checkin())
 #num is for number in range 1 to 100 step 2 if str(x) startswith method starts with str (5)
 ```
 
-# Question 3
+# Question 3 - Even Numbers
 
 Print all even numbers from 1 to 99, inclusive, with each number on a separate line.
 
@@ -93,7 +94,7 @@ for num in range(2,100,2):
 ```
 
 
-# Question 4
+# Question 4 - How big is the room?
 
 Build a program that asks the user to enter the length and width of a room, in meters, then prints the room's area in both square meters and square feet.
 
@@ -196,7 +197,7 @@ The input function returns a string. Thus, we need to use the float function to 
 
 The format specification {:.2f} ensures that the output is formatted to two decimal places.
 
-# Question 5
+# Question 5 - Tip Calculator
 
 - Create a simple tip calculator. 
 - The program should prompt for a bill amount and a tip rate. 
@@ -250,7 +251,7 @@ However, consider a scenario where we didn't explicitly convert the inputs using
 
 Since in Python, there's a clear distinction between string and number operations, always be sure to convert input strings to the appropriate numeric type before performing calculations.
 
-# Question 6
+# Question 6 - Sum or Product of Consecutive Integers
 
 Write a program that asks the user to enter an integer greater than 0, then asks whether the user wants to determine the sum or the product of all numbers between 1 and the entered integer, inclusive.
 
@@ -345,7 +346,7 @@ It's worth noting that, for summation, we leverage Python's built-in sum and ran
 
 There is no equivalent to sum for computing products built-in to Python, so we have to do so ourselves. Note that the NumPy package does have a prod function, but NumPy is overkill for this exercise.
 
-### urther Exploration
+### Further Exploration
 
 Suppose the input was a list of space separated integers instead of just a single integer? How would your compute_sum and compute_product functions change?
 
@@ -401,9 +402,59 @@ else:
 ```
 
 
-# Question 7
+# Question 7 - Short Long Short
 
-# Question 8
+Write a function that takes two strings as arguments, determines the length of the two strings, and then returns the result of concatenating the shorter string, the longer string, and the shorter string once again. You may assume that the strings are of different lengths.
+
+```python
+#These examples should all print True
+print(short_long_short('abc', 'defgh') == "abcdefghabc")
+print(short_long_short('abcde', 'fgh') == "fghabcdefgh")
+print(short_long_short('', 'xyz') == "xyz")
+```
+
+my answer: (if x was shorter than y, x prints first and last)
+```python
+def short_long_short(x, y):
+    if len(x) < len(y):
+        return x + y + x
+    else:
+        return y + x + y
+```
+
+# Question 8 - Leap years part 1
+
+Write a function that takes any year greater than 0 as input and returns True if the year is a leap year, or False if it is not.
+
+For simplicity, this exercise assumes that the Gregorian calendar has been in continuous use since the year 1. We'll address that assumption in the next exercise that follows this one.
+
+To determine whether a given year is a leap year, use the rules of the Gregorian calendar:
+
+If the year is divisible by 400, it is a leap year.
+If the year is divisible by 100 but not by 400, it is not a leap year.
+If the year is divisible by 4 but not by 100, it is a leap year.
+All other years are not leap years.
+
+```python
+# These examples should all print True
+print(is_leap_year(1) == False)
+print(is_leap_year(2) == False)
+print(is_leap_year(3) == False)
+print(is_leap_year(4) == True)
+print(is_leap_year(1000) == False)
+print(is_leap_year(1100) == False)
+print(is_leap_year(1200) == True)
+print(is_leap_year(1300) == False)
+print(is_leap_year(1751) == False)
+print(is_leap_year(1752) == True)
+print(is_leap_year(1753) == False)
+print(is_leap_year(1800) == False)
+print(is_leap_year(1900) == False)
+print(is_leap_year(2000) == True)
+print(is_leap_year(2023) == False)
+print(is_leap_year(2024) == True)
+print(is_leap_year(2025) == False)
+```
 
 # Question 9
 
