@@ -2,6 +2,19 @@ Practice Problems for Lesson 3 for PY109 course.
 - Practice Problems PY109: Easy 1
   
 ## Contents 
+- [Question 1 - Isn't it Odd?](#question-1---isnt-it-odd)
+- [Question 2 - Odd Numbers](#question-2---odd-numbers)
+- [Question 3 - Even Numbers](#question-3---even-numbers)
+- [Question 4 - How big is the room?](#question-4---how-big-is-the-room)
+- [Question 5 - Tip Calculator](#question-5---tip-calculator)
+- [Question 6 - Sum or Product of Consecutive Integers](#question-6---sum-or-product-of-consecutive-integers)
+    - [Further Exploration](#further-exploration)
+- [Question 7 - Short Long Short](#question-7---short-long-short)
+- [Question 8 - Leap years part 1](#question-8---leap-years-part-1)
+- [Question 9 - Leap years part 2](#question-9---leap-years-part-2)
+- [Question 10](#question-10)
+- [Question 11](#question-11)
+
 
 # Question 1 - Isn't it Odd?
 
@@ -540,4 +553,78 @@ print(multisum(10) == 33)
 print(multisum(1000) == 234168)
 ```
 
+
+answer:
+```python
+# initiate variable to hold value of integers.
+# for loop to iterate between a range of 1 and x + 1 (to be inclusive)
+# if number is divisible by 3 or 5 is true, add num to hold_num. Else pass.
+# Return value of hold_num
+def multisum(x):
+    hold_num = 0
+    for num in range(1,x + 1):
+        if num % 3 == 0 or num % 5 == 0:
+            hold_num += num
+        else:
+            pass
+    return hold_num
+```
+
+
+quiz answer:
+```python
+def is_multiple(number, divisor):
+    return number % divisor == 0
+
+def multisum(max_value):
+    total_sum = 0
+    for number in range(1, max_value + 1):
+        if is_multiple(number, 3) or is_multiple(number, 5):
+            total_sum += number
+    return total_sum
+```
+Begins with an is_multiple function that returns True if the given number is a multiple of the divisor, or False if it is not. 
+
+This function isn't entirely necessary, but it makes the main function more readable.
+
+The main function, multisum, adds each appropriate value in the range to our sum variable.
+
 # Question 11
+
+Write a function that determines and returns the UTF-16 string value of a string passed in as an argument. 
+
+The UTF-16 string value is the sum of the UTF-16 values of every character in the string. (You may use ord to determine the UTF-16 value of a character.)
+
+```python
+# These examples should all print True
+print(utf16_value('Four score') == 984)
+print(utf16_value('Launch School') == 1251)
+print(utf16_value('a') == 97)
+print(utf16_value('') == 0)
+
+# The next three lines demonstrate that the code
+# works with non-ASCII characters from the UTF-16
+# character set.
+OMEGA = "\u03A9"              # UTF-16 character 'Ω' (omega)
+print(utf16_value(OMEGA) == 937)
+print(utf16_value(OMEGA + OMEGA + OMEGA) == 2811)
+```
+
+My Answer:
+```python
+#ask user string input
+#function utf16_value
+#take string input and convert value of each character into utf-16 and provide sum of the numbers
+
+def utf16_value(strings):
+    sum_total = 0
+    for char in strings:
+        sum_total += ord(strings)
+    return sum_total
+```
+
+The solution starts by initializing a variable sum_ to 0.
+
+The function iterates through each character in the given string using a for loop. For each character, we use the ord function to get its UTF-16 value and add it to the sum. Finally, after iterating through all characters, the function returns the sum of all the character values.
+
+Python's built-in ord function returns the Unicode code point for a string of one character. In the context of this problem, it gives us the UTF-16 value for each character, which lets us calculate the desired sum.
