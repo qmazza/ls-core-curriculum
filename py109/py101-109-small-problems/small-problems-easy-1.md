@@ -456,8 +456,88 @@ print(is_leap_year(2024) == True)
 print(is_leap_year(2025) == False)
 ```
 
-# Question 9
+ASK user for input year greater than 0
+check input for leap year validation
+    If the year is divisible by 400, it is a leap year.
+    If the year is divisible by 100 but not by 400, it is not a leap year.
+    If the year is divisible by 4 but not by 100, it is a leap year.
+    All other years are not leap years.
+return True if leap year. False if not
+
+
+my answer:
+```python
+def is_leap_year(user_answer):
+    if user_answer % 400 == 0:
+        return True
+    elif user_answer % 4 == 0 and user_answer % 100 != 0:
+        return True
+    else:
+        return False
+```
+
+quiz answer:
+```python
+def is_leap_year(user_answer):
+    if user_answer % 400 == 0:
+        return True
+    elif user_answer % 100 == 0:
+        return False
+    else:
+        return user_answer % 4 == 0
+```
+
+# Question 9 - Leap years part 2
+
+In the previous exercise, we assumed that the Gregorian calendar has been in continuous use since the year 1. However, the Gregorian calendar wasn't adopted until much later; prior to that, much of the world used the Julian calendar, which observed leap year every 4 years.
+
+in 1752, England, Ireland, and the British colonies all switched to the Gregorian calendar. Update the function from the previous exercise so it uses the Julian calendar prior to 1752, and the Gregorian calendar starting in 1752.
+
+```python
+
+def is_leap_year(user_answer):
+    if user_answer < 1752 and user_answer % 4 == 0:
+        return True
+    elif user_answer % 400 == 0:
+        return True
+    elif user_answer % 100 == 0:
+        return False
+    else:
+        return user_answer % 4 == 0
+
+
+# These examples should all print True
+print(is_leap_year(1) == False)
+print(is_leap_year(2) == False)
+print(is_leap_year(3) == False)
+print(is_leap_year(4) == True)
+print(is_leap_year(1000) == True)
+print(is_leap_year(1100) == True)
+print(is_leap_year(1200) == True)
+print(is_leap_year(1300) == True)
+print(is_leap_year(1751) == False)
+print(is_leap_year(1752) == True)
+print(is_leap_year(1753) == False)
+print(is_leap_year(1800) == False)
+print(is_leap_year(1900) == False)
+print(is_leap_year(2000) == True)
+print(is_leap_year(2023) == False)
+print(is_leap_year(2024) == True)
+print(is_leap_year(2025) == False)
+```
 
 # Question 10
+
+Write a function that computes the sum of all numbers between 1 and some other number, inclusive, that are multiples of 3 or 5. For instance, if the supplied number is 20, the result should be 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20).
+
+You may assume that the number passed in is an integer greater than 1.
+
+```python
+# These examples should all print True
+print(multisum(3) == 3)
+print(multisum(5) == 8)
+print(multisum(10) == 33)
+print(multisum(1000) == 234168)
+```
 
 # Question 11
