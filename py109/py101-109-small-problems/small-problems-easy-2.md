@@ -12,6 +12,7 @@ Practice Problems for Lesson 3 for PY109 course.
 - [Question 8 - Odd Lists](#question-8---odd-lists)
 - [Question 9 - How Old is Teddy?](#question-9---how-old-is-teddy)
 - [Question 10 - When Will I Retire?](#question-10---when-will-i-retire)
+    - [More on datetime (further discussted in py120):](#more-on-datetime-further-discussted-in-py120)
 - [Question 11 - Get Middle Character](#question-11---get-middle-character)
 - [Question 12 - Always Return Negative](#question-12---always-return-negative)
 
@@ -226,66 +227,300 @@ print(penultimate("Launch School is great!") == "is")
 
 # Question 7 - Exclusive Or
 
-```python
+The or operator returns a truthy value if either or both of its operands are truthy, a falsy value if both operands are falsy. The and operator returns a truthy value if both of its operands are truthy, and a falsy value if either operand is falsy. This works great until you need only one of two conditions to be truthy, the so-called exclusive or, also known as xor (pronounced "ECKS-or").
 
+In this exercise, you will write an xor function that takes two arguments, and returns True if exactly one of its arguments is truthy, False otherwise.
+
+```python
+print(xor(5, 0) == True)
+print(xor(False, True) == True)
+print(xor(1, 1) == False)
+print(xor(True, True) == False)
 ```
 
 My Answer:
 ```python
+def xor(value1, value2):
+    if (value1 and not value2) or (value2 and not value1):
+        return True
 
+    return False
 ```
+simply returns True if exactly one of the values is truthy; otherwise, it returns False.
+
+Shorter better version:
+```python
+def xor(value1, value2):
+    return bool((value1 and not value2) or (value2 and not value1))
+```
+
+xor does not short circuit as it depends on its operands.
 
 # Question 8 - Odd Lists
 
-```python
+Write a function that returns a list that contains every other element of a list that is passed in as an argument. The values in the returned list should be those values that are in the 1st, 3rd, 5th, and so on elements of the argument list.
 
+```python
+print(oddities([2, 3, 4, 5, 6]) == [2, 4, 6])  # True
+print(oddities([1, 2, 3, 4]) == [1, 3])        # True
+print(oddities(["abc", "def"]) == ['abc'])     # True
+print(oddities([123]) == [123])                # True
+print(oddities([]) == [])                      # True x
 ```
 
-My Answer:
+My Answer: (using range for start 0, stop at end, with a step 2)
 ```python
+def oddities(inp_list):
+    new_list = []
+    for elem in inp_list[0::2]:
+        new_list.append(elem)
+        print(elem)
+    return new_list
+```
+
+quiz answer:
+```python
+def oddities(lst):
+    result = []
+    for idx in range(len(lst)):
+        if idx % 2 == 0:
+            result.append(lst[idx])
+
+    return result
 
 ```
+This problem can be slightly confusing since we want the 1st, 3rd, 5th, and so on elements of the list, but these correspond to elements with indexes 0, 2, 4, etc. As long as you keep that in mind, there are many different ways to solve this problem correctly.
+
+In this approach:
+
+We loop through all indexes of the list using range(len(lst)).
+In the loop, we check if the current index idx is even using the condition idx % 2 == 0. If it is even, it means we have an odd-numbered element (1st, 3rd, 5th, etc.), so we append the element to the result list.
+After iterating through all indexes, we return the result list.
+
+```python
+# Bonus question usoing sclicing:
+
+def oddities(lst):
+    return lst[::2]
+```
+The bonus solution takes advantage of Python's list slicing, which lets us start from the first element and skip every second element to get the desired result. Python makes it relatively easy to extract every other element using the slicing mechanism, which proves to be both concise and efficient. The [::2] syntax retrieves elements from the list starting from the beginning to the end, skipping every other element.
+
+Let's break this syntax down in more detail:
+
+Slicing Format: list[start:stop:step]
+start: The beginning index of the slice.
+stop: The end index of the slice (exclusive).
+step: The interval between elements.
+In [::2]:
+No start is provided, so it defaults to the beginning of the list.
+No stop is provided, so it defaults to the end of the list.
+2 is provided as the step, meaning every second element is taken.
+How [::2] Works:
+Starts at the beginning of the list.
+Skips every second element.
+Continues until the end of the list.
+
+using step includes end of list while stop is exclusive.
+
 
 # Question 9 - How Old is Teddy?
 
-```python
+Build a program that randomly generates and prints Teddy's age. To get the age, you should generate a random number between 20 and 100, inclusive.
 
+```python
+Teddy is 69 years old!
 ```
 
 My Answer:
 ```python
+import random
 
+def teddy_age():
+    return random.randrange(20,101)
+
+print(f'Teddy is {teddy_age()} years old!')
 ```
 
+
+quiz answer:
+```python
+import random
+
+age = random.randint(20, 100)
+print(f"Teddy is {age} years old!")
+```
+randint is inclusive
+```python
+import random
+
+age = random.randint(20, 100)
+
+print(f"Teddy is {age} years old!")
+name = input('What is your name?:'default=Teddy)
+print(f'{name} is {age} years old!')
+```
+
+further exploration - 
+Modify this program to ask for a name, then print the age for that person. For an extra challenge, use "Teddy" as the name if no name is entered.
+
+```python
+
+import random
+
+age = random.randint(20, 100)
+default_name = 'Teddy'
+print(f"Teddy is {age} years old!")
+name = input("What is your name?:")
+if name == '':
+    name = default_name
+print(f'{name} is {age} years old!')
+
+```
 # Question 10 - When Will I Retire?
 
-```python
+Build a program that displays when the user will retire and how many years she has to work till retirement.
 
+```python
+What is your age? 30
+At what age would you like to retire? 70
+
+It's 2024. You will retire in 2064.
+You have only 40 years of work to go!
 ```
 
 My Answer:
 ```python
+from datetime import datetime
 
+def ages(x, y):
+    return y - x
+
+age = int(input(f'What is your age?: '))
+retire_age = int(input(f'What age would you like to retire?: '))
+years_left = ages(age, retire_age)
+
+this_year = datetime.now().year
+retire_year = datetime.now().year + years_left
+
+print(f'It\'s {this_year}. You will retire in {retire_year}.')
+
+print(f'You have only {years_left} years of work to go!')
+```
+ we use datetime.now from the datetime module to get the current date. This returns a datetime object. The datetime object has a year attribute that provides the current year.
+ 
+ From there, we can determine the retirement year based on the two inputs and the current year.
+
+
+
+### More on datetime (further discussted in py120):
+
+In Python, when you use the import statement, you're essentially telling the interpreter to load a module or package, making its contents (functions, classes, and variables) available in your code. The way you import the module affects how you can access its contents.
+
+When you do:
+
+```python
+import datetime
+```
+You are importing the datetime module. However, the datetime module contains a class that is also named datetime.datetime that contains methods like datetime.datetime.now. So if you were to use the above import, you would have to retrieve the current year by using:
+
+```python
+current_year = datetime.datetime.now().year
+```
+As you can see, the datetime.datetime syntax can be redundant and a bit confusing since you have to use datetime twice: once for the module and once for the class.
+
+On the other hand, when you use:
+
+```python
+from datetime import datetime
+```
+You are specifically importing the datetime class (the second use of datetime) from the datetime module (the first use of datetime). This means you can directly use the datetime.datetime class and its methods without prefixing it with the module name:
+
+```python
+current_year = datetime.now().year
+```
+You can also use an alias for the datetime.datetime class:
+
+```python
+from datetime import datetime as dt
+```
+You are specifically importing the datetime class (the second use of datetime) from the datetime module (the first use of datetime) and giving it an alias of dt. This means you can directly use the datetime.datetime class and its methods by prefixing the method name with dt.:
+
+
+```python
+current_year = dt.now().year
 ```
 
 # Question 11 - Get Middle Character
 
+Write a function that takes a non-empty string argument and returns the middle character(s) of the string. If the string has an odd length, you should return exactly one character. If the string has an even length, you should return exactly two characters.
+
 ```python
+print(center_of('I Love Python!!!') == "Py")    # True
+print(center_of('Launch School') == " ")        # True
+print(center_of('Launchschool') == "hs")        # True
+print(center_of('Launch') == "un")              # True
+print(center_of('Launch School is #1') == "h")  # True
+print(center_of('x') == "x")                    # True
+```
+
+My Answer: (use floor quotient for integer. / will give float)
+```python
+def center_of(string):
+    odd_middle = int(len(string) // 2)
+    even_middle1 = int(len(string) // 2 - 1)
+    even_middle2 = int(len(string) // 2)
+    if len(string) % 2 == 0:
+        return string[even_middle1] + string[even_middle2]
+    else:
+        return string[odd_middle]
 
 ```
 
-My Answer:
+quiz answer: (+ 2 to print 2 characters from left index which is -1)
 ```python
-
+def center_of(string):
+    if len(string) % 2 == 1:
+        center_index = len(string) // 2
+        return string[center_index]
+    else:
+        left_index = len(string) // 2 - 1
+        return string[left_index:left_index + 2]
 ```
+
+
+length: 6	
+right index: 6 // 2 => 3	
+left index: 3 - 1 => 2
+
+Given the left index we've calculated, we can now use string slicing to extract the two characters starting at the left index as the middle characters. For our 6 character example, the syntax string[left_index:left_index + 2] will extract two characters from the string starting at left_index.
+
 
 # Question 12 - Always Return Negative
 
-```python
+Write a function that takes a number as an argument. If the argument is a positive number, return the negative of that number. If the argument is a negative number, return it as-is.
 
+```python
+print(negative(5) == -5)      # True
+print(negative(-3) == -3)     # True
+print(negative(0) == 0)       # True
 ```
 
 My Answer:
 ```python
+def negative(num):
+    if num > 0:
+        return(-num)
+    elif num == 0:
+        return num
+    else:
+        return num
 
 ```
+
+quiz answer:
+```python
+def negative(number):
+    return -abs(number)
+```
+Python has a built-in `abs` functin which returns the absolue value of a specified number.
+By preficing the result abs(number) with a negative sign , function always returns the negative representation of the given number
